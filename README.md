@@ -31,7 +31,7 @@ flowchart LR
     MEM["Checkpointed Memory"]
 
     subgraph TOOLS["External Tools"]
-        VS["Vector Store (AstraDB)"]
+        VS["AstraDB"]
         WK["Wikipedia"]
     end
 
