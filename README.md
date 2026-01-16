@@ -41,15 +41,11 @@ flowchart LR
     U --> LC_AGENT
     U --> LG_AGENT
 
+    LG_AGENT <--> MEM
     LC_AGENT --> LLM
     LG_AGENT --> LLM
-
-    LG_AGENT <--> MEM
-
     LLM --> TOOLS
-
     TOOLS --> LLM
-
     LLM --> RESP
 
 ``` 
