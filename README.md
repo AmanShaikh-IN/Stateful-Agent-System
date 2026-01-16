@@ -54,6 +54,7 @@ flowchart TD
     MEM --> LG
 
     LLM --> RESP
+``` 
 ## Environment Setup
 
 This project supports running in **Google Colab** or **locally**.
