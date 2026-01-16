@@ -29,12 +29,10 @@ flowchart LR
 
     subgraph LC["LangChain AgentExecutor"]
         LC_AGENT["AgentExecutor"]
-        LC_LLM["LLM"]
     end
 
     subgraph LG["LangGraph ReAct Agent"]
         LG_AGENT["Graph Agent"]
-        LG_LLM["LLM"]
         MEM["Checkpointed Memory"]
     end
 
@@ -43,21 +41,22 @@ flowchart LR
         WK["Wikipedia"]
     end
 
+    LLM["llama-4-maverick-17b-128e-instruct"]
     RESP["Final Answer"]
 
     U --> LC_AGENT
     U --> LG_AGENT
 
-    LC_AGENT --> LC_LLM
-    LG_AGENT --> LG_LLM
+    LC_AGENT --> LLM
+    LG_AGENT --> LLM
 
     LG_AGENT <--> MEM
 
-    LC_LLM --> TOOLS
-    LG_LLM --> TOOLS
+    LLM --> TOOLS
+    LLM --> TOOLS
 
-    TOOLS --> LC_LLM
-    TOOLS --> LG_LLM
+    TOOLS --> LLM
+    TOOLS --> LLM
 
     LC_LLM --> RESP
     LG_LLM --> RESP
