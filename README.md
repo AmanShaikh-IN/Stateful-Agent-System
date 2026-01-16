@@ -24,36 +24,44 @@ This implementation emphasizes **agent reasoning, state management, and system-l
 ## Architecture
 
 ```mermaid
-flowchart TD
+flowchart LR
     U["User Query"]
-    
-    LC["LangChain AgentExecutor"]
-    LG["LangGraph ReAct Agent"]
-    
-    LLM["LLM (Groq-hosted LLaMA)"]
-    
-    VS["Vector Store Tool (AstraDB)"]
-    WK["Wikipedia Tool"]
-    
-    MEM["Checkpointed Memory"]
+
+    subgraph LC["LangChain AgentExecutor"]
+        LC_AGENT["AgentExecutor"]
+        LC_LLM["LLM"]
+    end
+
+    subgraph LG["LangGraph ReAct Agent"]
+        LG_AGENT["Graph Agent"]
+        LG_LLM["LLM"]
+        MEM["Checkpointed Memory"]
+    end
+
+    subgraph TOOLS["External Tools"]
+        VS["Vector Store (AstraDB)"]
+        WK["Wikipedia"]
+    end
+
     RESP["Final Answer"]
 
-    U --> LC
-    U --> LG
+    U --> LC_AGENT
+    U --> LG_AGENT
 
-    LC --> LLM
-    LG --> LLM
+    LC_AGENT --> LC_LLM
+    LG_AGENT --> LG_LLM
 
-    LLM --> VS
-    LLM --> WK
+    LG_AGENT <--> MEM
 
-    VS --> LLM
-    WK --> LLM
+    LC_LLM --> TOOLS
+    LG_LLM --> TOOLS
 
-    LG --> MEM
-    MEM --> LG
+    TOOLS --> LC_LLM
+    TOOLS --> LG_LLM
 
-    LLM --> RESP
+    LC_LLM --> RESP
+    LG_LLM --> RESP
+
 ``` 
 ## Environment Setup
 
