@@ -26,15 +26,9 @@ This implementation emphasizes **agent reasoning, state management, and system-l
 ```mermaid
 flowchart LR
     U["User Query"]
-
-    subgraph LC["LangChain AgentExecutor"]
-        LC_AGENT["AgentExecutor"]
-    end
-
-    subgraph LG["LangGraph ReAct Agent"]
-        LG_AGENT["GraphAgent"]
-        MEM["Checkpointed Memory"]
-    end
+    LC_AGENT["LangChain AgentExecutor"]
+    LG_AGENT["GraphAgent"]
+    MEM["Checkpointed Memory"]
 
     subgraph TOOLS["External Tools"]
         VS["Vector Store (AstraDB)"]
